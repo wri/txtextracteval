@@ -1,0 +1,16 @@
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+.pytest_cache/
+*.egg-info
+
+.venv
+.env
+.cursor
+output/
+.coverage
+.DS_Store
+project_docs/
+*.log
