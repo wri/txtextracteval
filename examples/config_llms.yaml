@@ -1,0 +1,28 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract # Include for comparison
+  - type: llm_api
+    config:
+      provider: gemini
+      model: "gemini-2.0-flash-lite" # Or another suitable Gemini vision model
+      prompt: "Extract the text content verbatim from this document image."
+  - type: llm_api
+    config:
+      provider: anthropic
+      model: "claude-3-5-haiku-20241022"
+      prompt: "Extract the text content verbatim from this document image."
+  - type: llm_api
+    config:
+      provider: openai
+      model: "gpt-4.1-nano"
+      prompt: "Extract the text content verbatim from this document image."
+transformations: []
+metrics:
+  - cer
+  - wer
+  - latency
+  - cost # Placeholder cost calculation
+output:
+  directory: "output/output_llms_test"
+  report_filename: "report_llms.md" 

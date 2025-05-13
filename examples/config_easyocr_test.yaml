@@ -1,0 +1,17 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract # Include for comparison
+  - type: easyocr
+    config:
+      languages: ["en"] # Specify English language
+      gpu: false # Explicitly set GPU to false for CI/testing environments if needed
+transformations: []
+metrics:
+  - cer
+  - wer
+  - latency
+  - cost
+output:
+  directory: "output/output_easyocr_test"
+  report_filename: "report_easyocr.md" 

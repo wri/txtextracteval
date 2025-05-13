@@ -1,0 +1,25 @@
+images: ["project_docs/full_example.png"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract # Include for comparison
+  - type: llm_api
+    config:
+      provider: gemini
+      model: "gemini-2.0-flash-lite" # Or another suitable Gemini vision model
+      # api_key_env: "MY_GEMINI_KEY" # Optional: Use a different env var name
+      prompt: "Extract the text content verbatim from this document image."
+  - type: llm_api
+    config:
+      provider: gemini
+      model: "gemini-2.0-flash-lite" # Or another suitable Gemini vision model
+      # api_key_env: "MY_GEMINI_KEY" # Optional: Use a different env var name
+      prompt: "Extract the table from this document image."
+transformations: []
+metrics:
+  - cer
+  - wer
+  - latency
+  - cost # Placeholder cost calculation for Gemini
+output:
+  directory: "output/output_gemini_test"
+  report_filename: "report_gemini.md" 

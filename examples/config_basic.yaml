@@ -1,0 +1,20 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract
+    config:
+      psm: 3
+  - type: tesseract
+    config:
+      psm: 4
+transformations:
+  - name: blur
+    params:
+      kernel_size: 15  # Must be odd
+metrics:
+  - cer
+  - wer
+  - latency
+output:
+  directory: "output/output_basic"
+  report_filename: "report_basic.md" 

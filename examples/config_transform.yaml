@@ -1,0 +1,39 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract
+transformations:
+  - name: blur
+    params:
+      kernel_size: 5  # Must be odd
+  - name: brightness
+    params:
+      factor: 0.7 # Darker
+  - name: rotate
+    params:
+      angle: 10 # Rotate 10 degrees CCW
+  - name: noise
+    params:
+      mean: 0.0
+      stddev: 30.0 # Add some noise
+  - name: crop
+    params:
+      crop_fraction: 0.1 # Crop 10% from each border
+  - name: skew
+    params:
+      skew_angle_x: 5.0 # Shear horizontally by 5 degrees
+      skew_angle_y: 2.0 # Shear vertically by 2 degrees
+  - name: ocr_prep # Composite pipeline
+    params:
+      denoise_ksize: 3 # Denoise kernel size
+      crop_frac: 0.03 # Crop 3% border
+  - name: reduce_resolution
+    params:
+      scale_factor: 0.6 # Reduce to 60% of original size
+metrics:
+  - cer
+  - wer
+  - latency
+output:
+  directory: "output/output_transform_test"
+  report_filename: "report_transform.md" 

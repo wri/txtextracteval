@@ -1,0 +1,36 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract
+    config:
+      psm: 1
+  - type: tesseract
+    config:
+      psm: 3
+  - type: tesseract
+    config:
+      psm: 4
+  - type: tesseract
+    config:
+      psm: 5
+  - type: tesseract
+    config:
+      psm: 6
+transformations:
+  - name: blur
+    params:
+      kernel_size: 5  # Must be odd
+  - name: brightness
+    params:
+      factor: 0.7 # Darker
+  - name: ocr_prep # Composite pipeline
+    params:
+      denoise_ksize: 3 # Denoise kernel size
+      crop_frac: 0.03 # Crop 3% border
+metrics:
+  - cer
+  - wer
+  - latency
+output:
+  directory: "output/output_tesseract_psm"
+  report_filename: "report_tesseract_psm.md" 

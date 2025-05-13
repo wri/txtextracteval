@@ -1,0 +1,26 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract
+  - type: hf_ocr
+    config:
+      model: "HuggingFaceTB/SmolVLM-256M-Instruct"
+      # "HuggingFaceTB/SmolVLM-256M-Instruct"
+      # device: -1 # Optional: Force CPU (default in current hf.py)
+      # device: 0 # Optional: Try GPU 0 if available and configured
+      prompt: "What is the precise text in this image?"
+  - type: hf_ocr
+    config:
+      model: "HuggingFaceTB/SmolVLM-256M-Instruct"
+      # "HuggingFaceTB/SmolVLM-256M-Instruct"
+      # device: -1 # Optional: Force CPU (default in current hf.py)
+      # device: 0 # Optional: Try GPU 0 if available and configured
+      prompt: "Respond with only the text extracted from this image."
+transformations: [] # No transformations for this test
+metrics:
+  - cer
+  - wer
+  - latency
+output:
+  directory: "output/output_hf_test"
+  report_filename: "report_hf.md" 

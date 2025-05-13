@@ -1,0 +1,32 @@
+images: ["examples/sample.jpeg"]
+ground_truth: ["examples/sample.txt"]
+methods:
+  - type: tesseract # Include for comparison
+  - type: llm_api
+    config:
+      provider: ollama
+      model: gemma3:4b # Explicitly set model to gemma3
+      # endpoint: "http://localhost:11434" # Default endpoint is usually correct
+      prompt: "Extract the text verbatim from the document in this image." # Optional custom prompt
+      timeout: 180 # Optional: Increase timeout if needed
+  - type: llm_api
+    config:
+      provider: ollama
+      model: granite3.2-vision:2b # Explicitly set model to granite3.2-vision
+      prompt: "Extract the text verbatim from the document in this image." # Optional custom prompt
+      timeout: 180 # Optional: Increase timeout if needed
+  - type: llm_api
+    config:
+      provider: ollama
+      model: moondream:1.8b
+      prompt: "Extract the text verbatim from the document in this image." # Optional custom prompt
+      timeout: 180 # Optional: Increase timeout if needed
+transformations: []
+metrics:
+  - cer
+  - wer
+  - latency
+  - cost # Will be 0 for ollama
+output:
+  directory: "output/output_ollama_test"
+  report_filename: "report_ollama.md" 
